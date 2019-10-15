@@ -5,6 +5,7 @@ templates:
   start.erb: bin/start
   stop.erb: bin/stop
 
-packages: []
+packages:
+- redis_5.0.6
 
 properties: {}
