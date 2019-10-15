@@ -1,0 +1,81 @@
+# Specs for a manifest can be found here:
+# https://bosh.io/docs/manifest-v2/
+name: redis-on-bosh
+# not required by CLI v2
+# director_uuid:
+
+# optional, https://bosh.io/docs/manifest-v2/#features
+# features: {}
+
+releases:
+- name: redis-bosh
+  version: 0+dev.1
+
+# details about stemcells here:
+# https://bosh.io/stemcells/
+# for GCP: https://bosh.io/stemcells/bosh-google-kvm-ubuntu-xenial-go_agent#v456.30
+# this one is uploaded by this command:
+# bosh upload-stemcell --sha1 819b171120d1ce5e583f601adee009a90085d20c \
+# https://bosh.io/d/stemcells/bosh-google-kvm-ubuntu-xenial-go_agent?v=456.30
+stemcells:
+- alias: default
+  os: ubuntu-xenial
+  version: "456.30"
+
+# https://bosh.io/docs/manifest-v2/#update
+update:
+  canaries: 1
+  max_in_flight: 1
+  # both watch times are in milliseconds
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
+  # optional
+  # serial:
+  # vm_strategy:
+  # initial_deploy_az_update_strategy:
+
+# https://bosh.io/docs/manifest-v2/#instance-groups
+instance_groups:
+- name: deploy_redis
+  # to view existing azs, do `bosh int <(bosh cloud-config) --path=/azs`
+  azs:
+  - z1
+  instances: 1
+  jobs:
+  - name: deploy_redis
+    release: redis-bosh
+  # to view available vm_types, do `bosh int <(bosh cloud-config) --path=/vm_types`
+  vm_type: minimal
+  # instead of specific vm_types, we can specify vm_resources instead
+  # vm_resources:
+  #   cpu: 1
+  #   in megabytes
+  #   ram: 1024
+  #   in megabytes
+  #   ephemeral_disk_size: 20480 # (1024 * 20)
+  stemcell: default
+  # in megabytes
+  persistent_disk: 20480 # (1024 * 20)
+  # optional
+  # persistent_disk_type:
+  networks:
+  # to view available networks, do `bosh int <(bosh cloud-config) --path=/networks`
+  - name: default
+  # optional
+  # update:
+  # migrated_from:
+  # lifecycle:
+  # properties:
+  # env:
+
+# https://bosh.io/docs/manifest-v2/#addons
+addons: []
+
+# optional, deprecated
+# properties: {}
+
+# optional. https://bosh.io/docs/manifest-v2/#variables
+# variables: []
+
+# optional, https://bosh.io/docs/manifest-v2/#tags
+# tags: {}
