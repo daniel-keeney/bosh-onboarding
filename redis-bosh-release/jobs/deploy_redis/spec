@@ -1,0 +1,10 @@
+---
+name: deploy_redis
+
+templates:
+  start.erb: bin/start
+  stop.erb: bin/stop
+
+packages: []
+
+properties: {}

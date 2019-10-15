@@ -1,0 +1,5 @@
+check process deploy_redis
+  with pidfile /var/vcap/sys/run/deploy_redis/pid
+  start program /var/vcap/jobs/deploy_redis/bin/start
+  stop program /var/vcap/jobs/deploy_redis/bin/stop
+  group vcap

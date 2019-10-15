@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "I am in `pwd`"
+
+cd /var/vcap/src/redis-stable
+
+echo "I am in `pwd`"
+
+make
+./src/redis-server
