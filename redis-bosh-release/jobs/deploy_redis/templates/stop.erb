@@ -1,3 +1,8 @@
 #!/bin/bash
 
-pkill redis-server
+RUN_DIR=/var/vcap/sys/run/deploy_redis
+LOG_DIR=/var/vcap/sys/log/deploy_redis
+PIDFILE=${RUN_DIR}/pid
+
+kill -9 `cat $PIDFILE`
+rm -f $PIDFILE

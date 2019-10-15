@@ -1,5 +1,14 @@
 #!/bin/bash
 
-echo "I am in `pwd`"
+RUN_DIR=/var/vcap/sys/run/deploy_redis
+LOG_DIR=/var/vcap/sys/log/deploy_redis
+PIDFILE=${RUN_DIR}/pid
 
-redis-server
+mkdir -p $RUN_DIR $LOG_DIR
+chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+echo $$ > $PIDFILE
+
+exec redis-server \
+  >> $LOG_DIR/web_ui.stdout.log \
+  2>> $LOG_DIR/web_ui.stderr.log
