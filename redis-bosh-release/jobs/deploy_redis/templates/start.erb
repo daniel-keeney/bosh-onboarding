@@ -11,6 +11,6 @@ echo $$ > $PIDFILE
 
 export PATH=/var/vcap/packages/redis_5.0.6/bin:$PATH
 
-exec redis-server \
+exec redis-server /var/vcap/jobs/deploy_redis/myconf \
   >> $LOG_DIR/redis.stdout.log \
   2>> $LOG_DIR/redis.stderr.log

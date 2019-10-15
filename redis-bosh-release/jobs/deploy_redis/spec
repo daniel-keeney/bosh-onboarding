@@ -3,9 +3,16 @@ name: deploy_redis
 
 templates:
   start.erb: bin/start
+  conf.erb: myconf
   stop.erb: bin/stop
 
 packages:
 - redis_5.0.6
 
-properties: {}
+properties:
+  interpolated-port:
+    default: 6379
+    description: Port that redis server listens on
+  interpolated-password:
+    default: "hello world"
+    description: password to use when connecting
