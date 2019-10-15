@@ -9,7 +9,7 @@ name: redis-on-bosh
 
 releases:
 - name: redis-bosh
-  version: 0+dev.1
+  version: 0+dev.3
 
 # details about stemcells here:
 # https://bosh.io/stemcells/

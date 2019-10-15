@@ -9,6 +9,8 @@ chown -R vcap:vcap $RUN_DIR $LOG_DIR
 
 echo $$ > $PIDFILE
 
+export PATH=/var/vcap/packages/redis_5.0.6/bin:$PATH
+
 exec redis-server \
-  >> $LOG_DIR/web_ui.stdout.log \
-  2>> $LOG_DIR/web_ui.stderr.log
+  >> $LOG_DIR/redis.stdout.log \
+  2>> $LOG_DIR/redis.stderr.log
