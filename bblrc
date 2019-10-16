@@ -1,3 +1,6 @@
 export BBL_IAAS=gcp
 export BBL_GCP_REGION=us-central1
 export BBL_GCP_SERVICE_ACCOUNT_KEY=`cat ~/Downloads/cf-pks-pks-onboarding-beaf07180161.json`
+pushd redis-bbl-state > /dev/null
+  eval "$(bbl print-env)"
+popd > /dev/null

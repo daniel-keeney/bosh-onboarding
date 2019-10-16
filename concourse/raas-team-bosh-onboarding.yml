@@ -1,0 +1,9 @@
+roles:
+  - name: member
+    github:
+      users:
+        - wilsonehusin
+        - daniel-keeney
+        - maryamklabib
+        - medoror
+        - vlad-stoian
