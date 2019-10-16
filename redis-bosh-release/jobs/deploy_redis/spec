@@ -16,3 +16,6 @@ properties:
   interpolated-password:
     default: "hello world"
     description: password to use when connecting
+  interpolated-shutdown-wait:
+    default: 10
+    description: time (in seconds) to wait for Redis Save before killing the server

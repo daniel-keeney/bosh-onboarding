@@ -4,5 +4,14 @@ RUN_DIR=/var/vcap/sys/run/deploy_redis
 LOG_DIR=/var/vcap/sys/log/deploy_redis
 PIDFILE=${RUN_DIR}/pid
 
-kill -9 `cat $PIDFILE`
-rm -f $PIDFILE
+oldpid=`cat $PIDFILE`
+
+/var/vcap/packages/redis_5.0.6/bin/redis-cli \
+  -h localhost \
+  -p <%= p('interpolated-port') %> \
+  -a "<%= p('interpolated-password') %>" \
+  SHUTDOWN SAVE &
+
+sleep <%= p('interpolated-shutdown-wait') %>
+
+kill -9 $oldpid || true
