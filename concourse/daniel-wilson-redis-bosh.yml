@@ -1,0 +1,46 @@
+---
+resource_types:
+- name: bosh-deployment
+  type: docker-image
+  source:
+    repository: cloudfoundry/bosh-deployment-resource
+
+resources:
+- name: bosh-director
+  type: bosh-deployment
+  source:
+    deployment: ((bosh-deployment))
+    target: ((bosh-target))
+    client: ((bosh-client))
+    client_secret: ((bosh-client-secret))
+    jumpbox_url: ((bosh-jumpbox-url))
+    jumpbox_username: ((bosh-jumpbox-username))
+    jumpbox_ssh_key: ((bosh-jumpbox-ssh-key))
+    ca_cert: ((bosh-ca-cert))
+- name: bosh-onboarding-repository
+  type: git
+  check_every: 5m
+  source:
+    uri: https://github.com/daniel-keeney/bosh-onboarding.git
+
+jobs:
+  - name: deploy-redis
+    plan:
+      - get: bosh-onboarding-repository
+      - task: read-manifest
+        config:
+          inputs:
+            - name: bosh-onboarding-repository
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: ubuntu
+              tag: latest
+          run:
+            path: cat
+            args:
+              - bosh-onboarding-repository/redis-bosh-release/manifest.yml
+      - put: bosh-director
+        params:
+          manifest: bosh-onboarding-repository/redis-bosh-release/manifest.yml
