@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export REDISCLI_AUTH="<%= p('interpolated-password') %>"
+set -ex
+
+/var/vcap/packages/redis_5.0.6/bin/redis-cli \
+  -h localhost \
+  -p <%= p('interpolated-port') %> \
+  PING

@@ -1,0 +1,16 @@
+---
+name: smoke_tests
+
+templates:
+  run.erb: bin/run
+
+packages:
+- redis_5.0.6
+
+properties:
+  interpolated-port:
+    default: 6379
+    description: Port that redis server listens on
+  interpolated-password:
+    default: "hello world"
+    description: password to use when connecting
