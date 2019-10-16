@@ -45,7 +45,7 @@ instance_groups:
   - name: deploy_redis
     release: redis-bosh
     properties: &REDIS_PROPERTIES
-      interpolated-port: 3606
+      interpolated-port: 36067
       interpolated-password: "hello bosh"
       interpolated-shutdown-wait: 5  # seconds
       interpolated-redis-dir: "/var/vcap/store/redis"

@@ -19,14 +19,16 @@ resources:
     ca_cert: ((bosh-ca-cert))
 - name: bosh-onboarding-repository
   type: git
-  check_every: 5m
   source:
     uri: https://github.com/daniel-keeney/bosh-onboarding.git
+    paths:
+      - redis-bosh-release/manifest.yml
 
 jobs:
   - name: deploy-redis
     plan:
       - get: bosh-onboarding-repository
+        trigger: true
       - task: read-manifest
         config:
           inputs:
