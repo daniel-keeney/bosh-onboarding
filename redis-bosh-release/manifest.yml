@@ -48,6 +48,7 @@ instance_groups:
       interpolated-port: 3606
       interpolated-password: "hello bosh"
       interpolated-shutdown-wait: 5  # seconds
+      interpolated-redis-dir: "/var/vcap/store/redis"
   # to view available vm_types, do `bosh int <(bosh cloud-config) --path=/vm_types`
   vm_type: minimal
   # instead of specific vm_types, we can specify vm_resources instead

@@ -1,10 +1,11 @@
 #!/bin/bash
 
+REDIS_DIR=<%= p('interpolated-redis-dir') %>
 RUN_DIR=/var/vcap/sys/run/deploy_redis
 LOG_DIR=/var/vcap/sys/log/deploy_redis
 PIDFILE=${RUN_DIR}/pid
 
-mkdir -p $RUN_DIR $LOG_DIR
+mkdir -p $REDIS_DIR $RUN_DIR $LOG_DIR
 chown -R vcap:vcap $RUN_DIR $LOG_DIR
 
 echo $$ > $PIDFILE

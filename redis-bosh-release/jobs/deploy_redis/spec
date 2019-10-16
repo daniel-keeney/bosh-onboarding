@@ -19,3 +19,6 @@ properties:
   interpolated-shutdown-wait:
     default: 10
     description: time (in seconds) to wait for Redis Save before killing the server
+  interpolated-redis-dir:
+    default: "/var/vcap/store/redis"
+    description: directory where Redis will store backup to disk
